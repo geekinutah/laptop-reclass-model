@@ -1,2 +1,2 @@
-# latop-reclass-model
+# laptop-reclass-model
 Evolving reclass model to play with stuff on my laptop
