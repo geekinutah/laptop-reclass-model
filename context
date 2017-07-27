@@ -1,0 +1,184 @@
+default_context:
+  cicd_control_node01_address: 10.1.51.91
+  cicd_control_node01_hostname: cid01
+  cicd_control_node02_address: 10.1.51.92
+  cicd_control_node02_hostname: cid02
+  cicd_control_node03_address: 10.1.51.93
+  cicd_control_node03_hostname: cid03
+  cicd_control_vip_address: 10.1.51.90
+  cicd_control_vip_hostname: cid
+  cicd_enabled: 'True'
+  cicd_private_key: |-
+    -----BEGIN RSA PRIVATE KEY-----
+    MIIEowIBAAKCAQEApwtgbXfTr/IaE3ofWU9zaFKBtKaKVWQUfFjg/MJUgKmcyUo+
+    JSD58pGj8IRsS+qCaH5SMLgk2vB5LNS9ZlZ6WtAFaXJdiOeDcXfakpd36PQuBfZW
+    0AdWXn0cu5f04ptbw0XGYC/snV9fGtSe0mJChUS+n4XbsGGRKvdLqUUrUGHIyNg1
+    qUUtvcHyoSagRqfcA/2/QlK4eD88/IBvCD4edfQLBL2aGNIKliYwnTzjB6OqmAX7
+    dFyB3xm+9rFHHEQVroXkkS5x6Tpfmc49ZPevrNG+B/nONe/TaQjlrGUkyJHip+mQ
+    XlQvbMg7LVJ9THmrq/+52JV1n15a2oahuLgGIwIDAQABAoIBACEdYEBTQOPgWssB
+    qrVJytcjhBML8OB8tpLwC6oP3DClby94SFmT7/jmZlmH5vAlzTRp1mFSH/xHL75z
+    bhibjCX0lx4QTfqV6rjTycDFxj+oKHeGHi+fRL/2jXui5CkII2jSrEDlP0LzZScs
+    f0+1qvpAZom5P5P3w4+A9r7Xt353kfDDYH4SO5xMt0aPPAzfdPX7k14NfZvd7835
+    Nqs6Je5yGVae5NoI19bXL784j5+miRMI7uk6866TQr7lJDin99rrZ+cJ6CC5qUQy
+    6zE0dX3xeLaMJszSNx8lO4IQuPcTIdg0aDSgyNW6FIpCmmNnrK11mXM3YwJBP7O4
+    kqy3OgECgYEA2/Ud+l25MNKbgOotjCqUrNL2UZFLoXcyRl13kVLIOIuO4p/Qd83d
+    xjSjKOmJND/9FVCNjGtuytua4uUWut+UAa4VhdF2WYSAqV8lQhnC6dBjjZoNrna2
+    NPcVNzzBkJFuG1oT8v6Pz1rfvgZbqT1g9LHkSSvewaejo+MNK/Fr9NcCgYEAwmqj
+    MS2K2fPQTgZK/2DkfPTNPAEW8FtOT0r+r5d+YzlesvEPRb4Sz7yk8xVFrQqum7YX
+    SrxwTEOsjENC11Cf/T7MX6WEF42s53QdVB5xzbIMAj3nwzIfDvhUQng5vvBH2+N3
+    Bn8d9lNtVLZFjfNP4rLPo5MpBhA8kVn9v3KcA5UCgYAMAHv6RVLtjxBdIGoL0+b4
+    5yn5mWv/C3n6zO7RRysVqsfJJd9CKkGHpyef+944s6UjnJmcp+ALwZ/Z8ZYj7D8v
+    OEiEXMGQcOJ0W3S0/qLcDzrfZyCH/IJEsZa+xNnrAYR4iZm9EJbYQaUjwUUPHwJD
+    V9GVDIfDGVqcfq8hTrMNUQKBgQCVm3n5XhJ7piOl5zHPU8CAZ+GHS09bpuecHRng
+    BbQ8puk4ykf2Y04WjhRg+v2jK5UyPe2ulVPVXD5rsVa+WkzDlI+xCq2bcmqbsb7f
+    /I2WvGyBTSIME4XS/0XX4KyPQlgJ3gC5/xgPdiOsDJd5pMLUsMUYGyZ2hAgX0ihy
+    Kr/kAQKBgA1uk+cB/fnWmR0vaOwDLIxe8/7u8wOCP1d3ut5qZKNielrizjZt3UjP
+    uZpcjyJOzkSnlU5yF9+IkMqHStiV/rRt6ZyavMclFcpC4WoxgF1V2U5vWRI37cdZ
+    Q3kX5YncZT5S85mT59jATwHI4TjCCbfMPEFd51MJv7kTwCH0G718
+    -----END RSA PRIVATE KEY-----
+  cicd_public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCnC2Btd9Ov8hoTeh9ZT3NoUoG0popVZBR8WOD8wlSAqZzJSj4lIPnykaPwhGxL6oJoflIwuCTa8Hks1L1mVnpa0AVpcl2I54Nxd9qSl3fo9C4F9lbQB1ZefRy7l/Tim1vDRcZgL+ydX18a1J7SYkKFRL6fhduwYZEq90upRStQYcjI2DWpRS29wfKhJqBGp9wD/b9CUrh4Pzz8gG8IPh519AsEvZoY0gqWJjCdPOMHo6qYBft0XIHfGb72sUccRBWuheSRLnHpOl+Zzj1k96+s0b4H+c4179NpCOWsZSTIkeKn6ZBeVC9syDstUn1Meaur/7nYlXWfXlrahqG4uAYj
+  cluster_domain: mikedeploy.local
+  cluster_name: mikedeploy
+  compute_bond_mode: active-backup
+  compute_primary_first_nic: eth1
+  compute_primary_second_nic: eth2
+  context_seed: kg173KAvpyiYvHnEeHl3McLCsXy893fuPuDltSaQj7mwB9RUvTVezhDwaXqp69XR
+  control_network_netmask: 255.255.255.0
+  control_network_subnet: 10.1.51.0/24
+  control_vlan: '10'
+  cookiecutter_template_branch: master
+  cookiecutter_template_url: git@github.com:Mirantis/mk2x-cookiecutter-reclass-model.git
+  deploy_network_gateway: 10.0.0.1
+  deploy_network_netmask: 255.255.255.0
+  deploy_network_subnet: 10.1.50.0/24
+  deployment_type: physical
+  dns_server01: 8.8.8.8
+  dns_server02: 8.8.4.4
+  email_address: geekinutah@gmail.com
+  gateway_primary_first_nic: eth1
+  gateway_primary_second_nic: eth2
+  infra_bond_mode: 802.3ad
+  infra_deploy_nic: eth0
+  infra_kvm01_control_address: 10.1.51.241
+  infra_kvm01_deploy_address: 10.1.50.241
+  infra_kvm01_hostname: kvm01
+  infra_kvm02_control_address: 10.1.51.242
+  infra_kvm02_deploy_address: 10.1.50.242
+  infra_kvm02_hostname: kvm02
+  infra_kvm03_control_address: 10.1.51.243
+  infra_kvm03_deploy_address: 10.1.50.243
+  infra_kvm03_hostname: kvm03
+  infra_kvm_vip_address: 10.1.51.240
+  infra_primary_first_nic: eth1
+  infra_primary_second_nic: eth2
+  kubernetes_enabled: 'False'
+  local_repositories: 'False'
+  maas_deploy_address: 10.1.51.16
+  maas_hostname: mas01
+  opencontrail_enabled: 'False'
+  openldap_domain: mikedeploy.local
+  openldap_enabled: 'True'
+  openldap_organisation: themikeorg
+  openstack_benchmark_node01_address: 10.1.51.95
+  openstack_benchmark_node01_hostname: bmk01
+  openstack_compute_count: '3'
+  openstack_compute_rack01_hostname: cmp
+  openstack_compute_rack01_single_subnet: 10.1.0.51
+  openstack_compute_rack01_tenant_subnet: 10.1.55
+  openstack_control_address: 10.1.51.10
+  openstack_control_hostname: ctl
+  openstack_control_node01_address: 10.1.51.11
+  openstack_control_node01_hostname: ctl01
+  openstack_control_node02_address: 10.1.51.12
+  openstack_control_node02_hostname: ctl02
+  openstack_control_node03_address: 10.1.51.13
+  openstack_control_node03_hostname: ctl03
+  openstack_database_address: 10.1.51.50
+  openstack_database_hostname: dbs
+  openstack_database_node01_address: 10.1.51.51
+  openstack_database_node01_hostname: dbs01
+  openstack_database_node02_address: 10.1.51.52
+  openstack_database_node02_hostname: dbs02
+  openstack_database_node03_address: 10.1.51.53
+  openstack_database_node03_hostname: dbs03
+  openstack_enabled: 'True'
+  openstack_gateway_node01_address: 10.1.51.224
+  openstack_gateway_node01_hostname: gtw01
+  openstack_gateway_node01_tenant_address: 10.1.55.6
+  openstack_gateway_node02_address: 10.1.51.225
+  openstack_gateway_node02_hostname: gtw02
+  openstack_gateway_node02_tenant_address: 10.1.55.7
+  openstack_gateway_node03_address: 10.1.51.226
+  openstack_gateway_node03_hostname: gtw03
+  openstack_gateway_node03_tenant_address: 10.1.55.8
+  openstack_message_queue_address: 10.1.51.40
+  openstack_message_queue_hostname: msg
+  openstack_message_queue_node01_address: 10.1.51.41
+  openstack_message_queue_node01_hostname: msg01
+  openstack_message_queue_node02_address: 10.1.51.42
+  openstack_message_queue_node02_hostname: msg02
+  openstack_message_queue_node03_address: 10.1.51.43
+  openstack_message_queue_node03_hostname: msg03
+  openstack_network_engine: ovs
+  openstack_nfv_dpdk_enabled: 'False'
+  openstack_nfv_sriov_enabled: 'False'
+  openstack_nova_compute_nfv_req_enabled: 'False'
+  openstack_ovs_dvr_enabled: 'True'
+  openstack_ovs_encapsulation_type: vxlan
+  openstack_proxy_address: 10.1.51.80
+  openstack_proxy_hostname: prx
+  openstack_proxy_node01_address: 10.1.51.81
+  openstack_proxy_node01_hostname: prx01
+  openstack_proxy_node02_address: 10.1.51.82
+  openstack_proxy_node02_hostname: prx02
+  openstack_telemetry_address: 10.1.51.75
+  openstack_telemetry_hostname: mdb
+  openstack_telemetry_node01_address: 10.1.51.76
+  openstack_telemetry_node01_hostname: mdb01
+  openstack_telemetry_node02_address: 10.1.51.77
+  openstack_telemetry_node02_hostname: mdb02
+  openstack_telemetry_node03_address: 10.1.51.78
+  openstack_telemetry_node03_hostname: mdb03
+  openstack_version: mitaka
+  platform: openstack_enabled
+  public_host: 10.1.57.11
+  publication_method: email
+  reclass_repository: https://github.com/geekinutah/laptop-reclass-model
+  salt_api_password: 40W69rkSt7KmxakZeiAC4Ly2Isg05IVE
+  salt_api_password_hash: $6$nWKJzJJw$md5vsl/I8Cwhe13fftvt52iSfBPnCbZI0udD02rGa7PyarQbGlc.gaALmzNuPJGZaO0QPxjTTbWUH714FPfTo/
+  salt_master_address: 10.1.51.15
+  salt_master_hostname: cfg01
+  salt_master_management_address: 10.1.50.15
+  stacklight_enabled: 'True'
+  stacklight_log_address: 10.1.51.60
+  stacklight_log_hostname: log
+  stacklight_log_node01_address: 10.1.51.61
+  stacklight_log_node01_hostname: log01
+  stacklight_log_node02_address: 10.1.51.62
+  stacklight_log_node02_hostname: log02
+  stacklight_log_node03_address: 10.1.51.63
+  stacklight_log_node03_hostname: log03
+  stacklight_monitor_address: 10.1.51.70
+  stacklight_monitor_hostname: mon
+  stacklight_monitor_node01_address: 10.1.51.71
+  stacklight_monitor_node01_hostname: mon01
+  stacklight_monitor_node02_address: 10.1.51.72
+  stacklight_monitor_node02_hostname: mon02
+  stacklight_monitor_node03_address: 10.1.51.73
+  stacklight_monitor_node03_hostname: mon03
+  stacklight_notification_address: geekinutah@gmail.com
+  stacklight_notification_smtp_host: 127.0.0.1
+  stacklight_telemetry_address: 10.1.51.85
+  stacklight_telemetry_hostname: mtr
+  stacklight_telemetry_node01_address: 10.1.51.86
+  stacklight_telemetry_node01_hostname: mtr01
+  stacklight_telemetry_node02_address: 10.1.51.87
+  stacklight_telemetry_node02_hostname: mtr02
+  stacklight_telemetry_node03_address: 10.1.51.88
+  stacklight_telemetry_node03_hostname: mtr03
+  stacklight_version: '1'
+  tenant_network_gateway: 10.1.55.1
+  tenant_network_netmask: 255.255.255.0
+  tenant_network_subnet: 10.1.55.0/24
+  tenant_vlan: '20'
+

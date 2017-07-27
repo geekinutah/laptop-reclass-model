@@ -1,0 +1,113 @@
+
+classes:
+- system.linux.system.single
+- system.openssh.server.team.lab
+- system.openssh.server.team.tcpcloud
+- system.openssh.server.team.mcp_qa
+- system.openssh.server.team.l1_support
+- system.openssh.server.team.l2_support
+- system.rsyslog.client.single
+- cluster.mikedeploy.openstack
+- cluster.mikedeploy.stacklight
+- cluster.mikedeploy.stacklight.client
+- cluster.mikedeploy.cicd
+parameters:
+  _param:
+    salt_control_trusty_image: http://apt-mk.mirantis.com/images/ubuntu-14-04-x64-mcp1.1.qcow2
+    salt_control_xenial_image: http://apt-mk.mirantis.com/images/ubuntu-16-04-x64-mcp1.1.qcow2
+    infra_config_hostname: cfg01
+    salt_minion_ca_host: ${_param:infra_config_hostname}.${_param:cluster_domain}
+    # infra service addresses
+    infra_config_address: 10.1.51.15
+    infra_config_deploy_address: 10.1.50.15
+
+    cluster_domain: mikedeploy.local
+    cluster_name: mikedeploy
+    cluster_public_host: 10.1.57.11
+    control_network_netmask: 255.255.255.0
+    tenant_network_netmask: 255.255.255.0
+
+    dns_server01: 8.8.8.8
+    dns_server02: 8.8.4.4
+    control_vlan: 10
+    tenant_vlan: 20
+
+    deploy_network_netmask: 255.255.255.0
+    deploy_network_gateway: 10.0.0.1
+
+    # MaaS parameters
+    infra_maas_node01_deploy_address: 10.1.51.16
+    infra_maas_node01_hostname: mas01
+    maas_admin_username: mirantis
+    maas_admin_password: Iva2gSOhbHwPy6eB
+    maas_db_password: REPLACE_BY_GENERATED_VALUE_DURING_INSTALL
+
+    infra_kvm_address: 10.1.51.240
+    infra_kvm_node01_address: 10.1.51.241
+    infra_kvm_node02_address: 10.1.51.242
+    infra_kvm_node03_address: 10.1.51.243
+    infra_kvm_node01_deploy_address: 10.1.50.241
+    infra_kvm_node02_deploy_address: 10.1.50.242
+    infra_kvm_node03_deploy_address: 10.1.50.243
+    infra_kvm_node01_hostname: kvm01
+    infra_kvm_node02_hostname: kvm02
+    infra_kvm_node03_hostname: kvm03
+
+    glusterfs_node01_address: ${_param:infra_kvm_node01_address}
+    glusterfs_node02_address: ${_param:infra_kvm_node02_address}
+    glusterfs_node03_address: ${_param:infra_kvm_node03_address}
+
+    linux_dhcp_interface:
+      enabled: true
+      type: eth
+      proto: dhcp
+    linux_single_interface:
+      enabled: true
+      type: eth
+      proto: static
+      address: ${_param:single_address}
+      netmask: ${_param:control_network_netmask}
+      name_servers:
+        - ${_param:dns_server01}
+        - ${_param:dns_server02}
+
+
+  salt:
+    minion:
+      trusted_ca_minions:
+        - ${_param:salt_minion_ca_host}
+
+  linux:
+    network:
+      host:
+        cfg01:
+          address: ${_param:infra_config_address}
+          names:
+          - ${_param:infra_config_hostname}
+          - ${_param:infra_config_hostname}.${_param:cluster_domain}
+        cfg:
+          address: ${_param:infra_config_address}
+          names:
+          - cfg
+          - cfg.${_param:cluster_domain}
+        kvm01:
+          address: ${_param:infra_kvm_node01_address}
+          names:
+          - ${_param:infra_kvm_node01_hostname}
+          - ${_param:infra_kvm_node01_hostname}.${_param:cluster_domain}
+        kvm02:
+          address: ${_param:infra_kvm_node02_address}
+          names:
+          - ${_param:infra_kvm_node02_hostname}
+          - ${_param:infra_kvm_node02_hostname}.${_param:cluster_domain}
+        kvm03:
+          address: ${_param:infra_kvm_node03_address}
+          names:
+          - ${_param:infra_kvm_node03_hostname}
+          - ${_param:infra_kvm_node03_hostname}.${_param:cluster_domain}
+    system:
+      name: ${_param:infra_config_hostname}
+      domain: ${_param:cluster_domain}
+      service:
+        apt-daily.timer:
+          status: dead

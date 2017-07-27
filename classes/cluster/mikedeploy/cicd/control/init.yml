@@ -1,0 +1,140 @@
+
+classes:
+  - system.linux.system.haveged
+  - system.glusterfs.client.cluster
+  - system.glusterfs.client.volume.aptly
+  - system.glusterfs.client.volume.gerrit
+  - system.glusterfs.client.volume.jenkins
+  - system.glusterfs.client.volume.registry
+  - system.glusterfs.client.volume.salt_pki
+  - system.glusterfs.client.volume.openldap
+ #- system.glusterfs.client.volume.salt
+  # Docker
+  - system.docker.host
+
+  # Generate aptly-publisher config to use for jenkins slaves
+  - system.aptly.client.publisher
+
+  # Keepalived
+  - system.keepalived.cluster.instance.cicd_control_vip
+
+  # HAProxy
+  - system.salt.minion.cert.proxy.cicd
+  - system.haproxy.proxy.single
+  - system.haproxy.proxy.listen.cicd.aptly
+  - system.haproxy.proxy.listen.cicd.gerrit
+  - system.haproxy.proxy.listen.cicd.jenkins
+  - system.haproxy.proxy.listen.docker.registry
+  - system.haproxy.proxy.listen.docker.visualizer
+  - system.haproxy.proxy.listen.openldap
+  - system.haproxy.proxy.listen.phpldapadmin
+  - system.haproxy.proxy.listen.mysql
+  - system.haproxy.proxy.listen.stats
+
+parameters:
+  _param:
+    cluster_node01_name: ${_param:cicd_control_node01_hostname}
+    cluster_node01_address: ${_param:cicd_control_node01_address}
+    cluster_node02_name: ${_param:cicd_control_node02_hostname}
+    cluster_node02_address: ${_param:cicd_control_node02_address}
+    cluster_node03_name: ${_param:cicd_control_node03_hostname}
+    cluster_node03_address: ${_param:cicd_control_node03_address}
+    keepalived_vip_virtual_router_id: 180
+    keepalived_vip_password: WyBXKiNGo2mHxOWC
+    keepalived_vip_interface: ens3
+    cluster_vip_address: ${_param:control_vip_address}
+    control_vip_address: ${_param:cicd_control_address}
+    cluster_public_host: ${_param:control_vip_address}
+    salt_api_password: 40W69rkSt7KmxakZeiAC4Ly2Isg05IVE
+    # Docker images and versions
+    docker_registry_http_secret: T9tgqrDjB9kdK0tm
+    # CI/CD service databases
+    mysql_admin_password: bc5LdOaeFBygx6vL
+    mysql_gerrit_password: zet6dCnGRqfu8dP6
+
+    # Proxy
+    cluster_ssl_certificate:
+      enabled: true
+      pem_file: /etc/haproxy/ssl/${_param:cluster_public_host}-all.pem
+    haproxy_bind_address: ${_param:cluster_vip_address}
+    haproxy_mysql_source_port: 13306
+
+    # Aptly
+    aptly_gpg_keypair_id: none
+    aptly_gpg_passphrase: none
+    aptly_server_secure: false
+    aptly_gpg_public_key: none
+    aptly_gpg_private_key: none
+    # OpenLDAP
+    openldap_organisation: "themikeorg"
+    openldap_dn: "dc=mikedeploy,dc=local"
+    openldap_domain: "mikedeploy.local"
+    openldap_admin_password: B0gIFcfW3mJIpztw
+    openldap_config_password: lYWIiADYMmOzPlFH
+    openldap_readonly_password: bo3wpc4cQb1BDAn0
+
+    # Jenkins
+    jenkins_slave_user: admin
+    jenkins_client_user: admin
+    jenkins_admin_password: ${_param:openldap_admin_password}
+    jenkins_security_ldap_server: ${_param:cluster_vip_address}
+    jenkins_security_ldap_root_dn: ${_param:openldap_dn}
+    jenkins_security_ldap_manager_dn: "cn=admin,${_param:openldap_dn}"
+    jenkins_security_ldap_manager_password: ${_param:openldap_admin_password}
+    jenkins_slave_password: ${_param:jenkins_admin_password}
+    jenkins_client_password: ${_param:jenkins_admin_password}
+    jenkins_admin_email: ${_param:admin_email}
+    jenkins_admin_public_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCnC2Btd9Ov8hoTeh9ZT3NoUoG0popVZBR8WOD8wlSAqZzJSj4lIPnykaPwhGxL6oJoflIwuCTa8Hks1L1mVnpa0AVpcl2I54Nxd9qSl3fo9C4F9lbQB1ZefRy7l/Tim1vDRcZgL+ydX18a1J7SYkKFRL6fhduwYZEq90upRStQYcjI2DWpRS29wfKhJqBGp9wD/b9CUrh4Pzz8gG8IPh519AsEvZoY0gqWJjCdPOMHo6qYBft0XIHfGb72sUccRBWuheSRLnHpOl+Zzj1k96+s0b4H+c4179NpCOWsZSTIkeKn6ZBeVC9syDstUn1Meaur/7nYlXWfXlrahqG4uAYj
+    jenkins_admin_private_key: |
+      -----BEGIN RSA PRIVATE KEY-----
+      MIIEowIBAAKCAQEApwtgbXfTr/IaE3ofWU9zaFKBtKaKVWQUfFjg/MJUgKmcyUo+
+      JSD58pGj8IRsS+qCaH5SMLgk2vB5LNS9ZlZ6WtAFaXJdiOeDcXfakpd36PQuBfZW
+      0AdWXn0cu5f04ptbw0XGYC/snV9fGtSe0mJChUS+n4XbsGGRKvdLqUUrUGHIyNg1
+      qUUtvcHyoSagRqfcA/2/QlK4eD88/IBvCD4edfQLBL2aGNIKliYwnTzjB6OqmAX7
+      dFyB3xm+9rFHHEQVroXkkS5x6Tpfmc49ZPevrNG+B/nONe/TaQjlrGUkyJHip+mQ
+      XlQvbMg7LVJ9THmrq/+52JV1n15a2oahuLgGIwIDAQABAoIBACEdYEBTQOPgWssB
+      qrVJytcjhBML8OB8tpLwC6oP3DClby94SFmT7/jmZlmH5vAlzTRp1mFSH/xHL75z
+      bhibjCX0lx4QTfqV6rjTycDFxj+oKHeGHi+fRL/2jXui5CkII2jSrEDlP0LzZScs
+      f0+1qvpAZom5P5P3w4+A9r7Xt353kfDDYH4SO5xMt0aPPAzfdPX7k14NfZvd7835
+      Nqs6Je5yGVae5NoI19bXL784j5+miRMI7uk6866TQr7lJDin99rrZ+cJ6CC5qUQy
+      6zE0dX3xeLaMJszSNx8lO4IQuPcTIdg0aDSgyNW6FIpCmmNnrK11mXM3YwJBP7O4
+      kqy3OgECgYEA2/Ud+l25MNKbgOotjCqUrNL2UZFLoXcyRl13kVLIOIuO4p/Qd83d
+      xjSjKOmJND/9FVCNjGtuytua4uUWut+UAa4VhdF2WYSAqV8lQhnC6dBjjZoNrna2
+      NPcVNzzBkJFuG1oT8v6Pz1rfvgZbqT1g9LHkSSvewaejo+MNK/Fr9NcCgYEAwmqj
+      MS2K2fPQTgZK/2DkfPTNPAEW8FtOT0r+r5d+YzlesvEPRb4Sz7yk8xVFrQqum7YX
+      SrxwTEOsjENC11Cf/T7MX6WEF42s53QdVB5xzbIMAj3nwzIfDvhUQng5vvBH2+N3
+      Bn8d9lNtVLZFjfNP4rLPo5MpBhA8kVn9v3KcA5UCgYAMAHv6RVLtjxBdIGoL0+b4
+      5yn5mWv/C3n6zO7RRysVqsfJJd9CKkGHpyef+944s6UjnJmcp+ALwZ/Z8ZYj7D8v
+      OEiEXMGQcOJ0W3S0/qLcDzrfZyCH/IJEsZa+xNnrAYR4iZm9EJbYQaUjwUUPHwJD
+      V9GVDIfDGVqcfq8hTrMNUQKBgQCVm3n5XhJ7piOl5zHPU8CAZ+GHS09bpuecHRng
+      BbQ8puk4ykf2Y04WjhRg+v2jK5UyPe2ulVPVXD5rsVa+WkzDlI+xCq2bcmqbsb7f
+      /I2WvGyBTSIME4XS/0XX4KyPQlgJ3gC5/xgPdiOsDJd5pMLUsMUYGyZ2hAgX0ihy
+      Kr/kAQKBgA1uk+cB/fnWmR0vaOwDLIxe8/7u8wOCP1d3ut5qZKNielrizjZt3UjP
+      uZpcjyJOzkSnlU5yF9+IkMqHStiV/rRt6ZyavMclFcpC4WoxgF1V2U5vWRI37cdZ
+      Q3kX5YncZT5S85mT59jATwHI4TjCCbfMPEFd51MJv7kTwCH0G718
+      -----END RSA PRIVATE KEY-----
+    # Jobs params
+    jenkins_gerrit_url: ssh://admin@${_param:haproxy_gerrit_bind_host}:${_param:haproxy_gerrit_ssh_bind_port}
+    jenkins_aptly_api_url: http://${_param:haproxy_aptly_api_bind_host}:${_param:haproxy_aptly_api_bind_port}
+    jenkins_aptly_url: http://${_param:haproxy_aptly_public_bind_host}:${_param:haproxy_aptly_public_bind_port}
+    # Gerrit
+    gerrit_admin_password: ${_param:openldap_admin_password}
+    gerrit_admin_email: ${_param:admin_email}
+    gerrit_public_host: http://${_param:haproxy_gerrit_bind_host}:${_param:haproxy_gerrit_bind_port}
+    gerrit_admin_public_key: ${_param:jenkins_admin_public_key}
+    gerrit_admin_private_key: ${_param:jenkins_admin_private_key}
+    gerrit_auth_type: LDAP
+    gerrit_ldap_server: "ldap://${_param:cluster_vip_address}"
+    gerrit_ldap_bind_user: "cn=admin,${_param:openldap_dn}"
+    gerrit_ldap_bind_password: ${_param:openldap_admin_password}
+    gerrit_ldap_account_base: ou=people,${_param:openldap_dn}
+    gerrit_ldap_group_base: ou=groups,${_param:openldap_dn}
+
+  linux:
+    system:
+      package:
+        ca-certificates-java:
+          version: latest
+    network:
+      interface:
+        ens3: ${_param:linux_single_interface}
