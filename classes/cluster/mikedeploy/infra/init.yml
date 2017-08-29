@@ -18,8 +18,12 @@ parameters:
     infra_config_hostname: cfg01
     salt_minion_ca_host: ${_param:infra_config_hostname}.${_param:cluster_domain}
     # infra service addresses
-    infra_config_address: 10.1.51.15
-    infra_config_deploy_address: 10.1.50.15
+    #
+    # See .context, I have overidden these so I can run the salt-master in a container
+    #infra_config_address: 10.1.51.15
+    #infra_config_deploy_address: 10.1.50.15
+    infra_config_address: 44.128.0.11
+    infra_config_deploy_address: 44.128.0.11
 
     cluster_domain: mikedeploy.local
     cluster_name: mikedeploy
